@@ -10,6 +10,7 @@ target 'Movies' do
   pod 'Kingfisher' 
   pod 'Alamofire'
   pod 'SwiftOverlays', '~> 5.0.1'
+  pod 'SwiftyJSON', '~> 4.0'
 
   target 'MoviesTests' do
     inherit! :search_paths

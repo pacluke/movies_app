@@ -2,23 +2,27 @@ PODS:
   - Alamofire (4.8.1)
   - Kingfisher (5.1.0)
   - SwiftOverlays (5.0.1)
+  - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
   - Kingfisher
   - SwiftOverlays (~> 5.0.1)
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Kingfisher
     - SwiftOverlays
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
   SwiftOverlays: ab459ea9194b0e96aaccaa00e9ead1bf6d46eef1
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 98d4147bad4d9d9062ec2ca59c629414951bafcc
+PODFILE CHECKSUM: d1f3191c1ac2627bae41ee3094b650983a2d4f76
 
 COCOAPODS: 1.5.3
