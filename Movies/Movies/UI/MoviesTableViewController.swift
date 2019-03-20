@@ -27,10 +27,6 @@ class MoviesTableViewController: UITableViewController {
     
     private var totalPages: Int = 0
     private var loadedPages: Int = 1
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +39,19 @@ class MoviesTableViewController: UITableViewController {
         
         self.title = "Movies"
         
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red:0.43, green:0.55, blue:0.63, alpha:1.0)
+        self.tableView.backgroundColor = UIColor(red:0.43, green:0.55, blue:0.63, alpha:1.0)
+        self.view.layer.backgroundColor = UIColor(red:0.43, green:0.55, blue:0.63, alpha:1.0).cgColor
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.43, green:0.55, blue:0.63, alpha:1.0)
+        
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.black], for: .normal)
+
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search upcoming movies..."
         navigationItem.searchController = searchController
         definesPresentationContext = true
-        searchController.searchBar.tintColor = UIColor.white
         
         self.showWaitOverlay()
         self.moviesControler.getMoviesData { (movies, totalPages) in
@@ -59,6 +62,7 @@ class MoviesTableViewController: UITableViewController {
         }
         
     }
+    
     
     // MARK: - Search view
     
@@ -109,6 +113,7 @@ class MoviesTableViewController: UITableViewController {
         cell.movieGenres.text = movie.genres
         cell.movieReleaseDate.text = movie.releaseDate
         cell.moviePoster.kf.setImage(with: movie.poster)
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         return cell
     }
@@ -124,6 +129,7 @@ class MoviesTableViewController: UITableViewController {
                 self.removeAllOverlays()
             }
         }
+        cell.backgroundColor = UIColor.clear
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -138,8 +144,8 @@ class MoviesTableViewController: UITableViewController {
         }
         
         if segue.identifier == "selectedMovie" {
-//            let movieView = segue.destination as! MovieViewController
-//            movieView.movie = movie
+            let movieView = segue.destination as! MovieInfoTableViewController
+            movieView.movie = movie
         }
     }
 

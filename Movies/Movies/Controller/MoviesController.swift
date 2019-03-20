@@ -26,6 +26,7 @@ class MoviesController {
             for movie in response{
                 let title: String = movie["title"].string ?? ""
                 let poster:URL = URL(string: "https://image.tmdb.org/t/p/w300\(movie["poster_path"].string ?? "")")!
+                let backdrop:URL = URL(string: "https://image.tmdb.org/t/p/w500\(movie["backdrop_path"].string ?? "")")!
                 var genres: String? = nil
                 
                 for genre in JSON(movie["genre_ids"]).array!{
@@ -45,7 +46,7 @@ class MoviesController {
                 
                 let overview: String = movie["overview"].string ?? ""
                 
-                movies.append(Movie(title: title, poster: poster, genres: genres ?? "", releaseDate: releaseDate, overview: overview))
+                movies.append(Movie(title: title, poster: poster, backdrop: backdrop, genres: genres ?? "", releaseDate: releaseDate, overview: overview))
             }
             
             completion(movies, totalPages)
