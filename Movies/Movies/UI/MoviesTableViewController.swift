@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MoviesTableViewController: UITableViewController {
+    
+    private var moviesData: [Movie] = [Movie]()
+    private let moviesControler: MoviesController = MoviesController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +22,14 @@ class MoviesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        self.title = "Movies"
+        
+        self.moviesControler.getMoviesData { movies in
+            self.moviesData = movies
+            self.tableView.reloadData()
+        }
+        
     }
 
     // MARK: - Table view data source
@@ -29,18 +41,22 @@ class MoviesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return moviesData.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movie", for: indexPath) as! MovieTableViewCell
+        
+        let movie = self.moviesData[indexPath.row]
 
-        // Configure the cell...
+        cell.movieTitle.text = movie.title
+        cell.movieGenres.text = movie.genres
+        cell.movieReleaseDate.text = movie.releaseDate
+        cell.moviePoster.kf.setImage(with: movie.poster)
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.

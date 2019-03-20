@@ -13,8 +13,8 @@
 		C123B2AB2241C0A000EF755C /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C123B2AA2241C0A000EF755C /* Movie.swift */; };
 		C123B2AD2241C63A00EF755C /* MoviesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C123B2AC2241C63A00EF755C /* MoviesTableViewController.swift */; };
 		C123B2AF2241C83100EF755C /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C123B2AE2241C83100EF755C /* MoviesController.swift */; };
+		C123B2B32241EA4E00EF755C /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C123B2B22241EA4E00EF755C /* MovieTableViewCell.swift */; };
 		C18733C022406BB3001D3021 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18733BF22406BB3001D3021 /* AppDelegate.swift */; };
-		C18733C222406BB3001D3021 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18733C122406BB3001D3021 /* ViewController.swift */; };
 		C18733C522406BB3001D3021 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18733C322406BB3001D3021 /* Main.storyboard */; };
 		C18733C722406BB4001D3021 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C18733C622406BB4001D3021 /* Assets.xcassets */; };
 		C18733CA22406BB4001D3021 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18733C822406BB4001D3021 /* LaunchScreen.storyboard */; };
@@ -51,9 +51,9 @@
 		C123B2AA2241C0A000EF755C /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C123B2AC2241C63A00EF755C /* MoviesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTableViewController.swift; sourceTree = "<group>"; };
 		C123B2AE2241C83100EF755C /* MoviesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
+		C123B2B22241EA4E00EF755C /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		C18733BC22406BB3001D3021 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18733BF22406BB3001D3021 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C18733C122406BB3001D3021 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C18733C422406BB3001D3021 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C18733C622406BB4001D3021 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C18733C922406BB4001D3021 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -165,8 +165,8 @@
 		C18733ED22406F18001D3021 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C18733C122406BB3001D3021 /* ViewController.swift */,
 				C123B2AC2241C63A00EF755C /* MoviesTableViewController.swift */,
+				C123B2B22241EA4E00EF755C /* MovieTableViewCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -457,9 +457,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C18733C222406BB3001D3021 /* ViewController.swift in Sources */,
 				C18733C022406BB3001D3021 /* AppDelegate.swift in Sources */,
 				C123B2AB2241C0A000EF755C /* Movie.swift in Sources */,
+				C123B2B32241EA4E00EF755C /* MovieTableViewCell.swift in Sources */,
 				C123B2AD2241C63A00EF755C /* MoviesTableViewController.swift in Sources */,
 				C123B2AF2241C83100EF755C /* MoviesController.swift in Sources */,
 				C18733F422407019001D3021 /* Service.swift in Sources */,
