@@ -19,8 +19,8 @@ class MoviesController {
         }
     }
     
-    public func getMoviesData(page: Int = 1, completion: @escaping(_ data : [Movie]) -> ()){
-        self.service.requestUpcomingMovies(page: page, completion: { response in
+    public func getMoviesData(page: Int = 1, completion: @escaping(_ data : [Movie], Int) -> ()){
+        self.service.requestUpcomingMovies(page: page, completion: { (response, totalPages) in
             var movies: [Movie] = [Movie]()
             
             for movie in response{
@@ -48,7 +48,7 @@ class MoviesController {
                 movies.append(Movie(title: title, poster: poster, genres: genres ?? "", releaseDate: releaseDate, overview: overview))
             }
             
-            completion(movies)
+            completion(movies, totalPages)
             
         })
     }

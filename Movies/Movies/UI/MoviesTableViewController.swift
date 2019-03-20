@@ -8,11 +8,14 @@
 
 import UIKit
 import Kingfisher
+import SwiftOverlays
 
 class MoviesTableViewController: UITableViewController {
     
     private var moviesData: [Movie] = [Movie]()
     private let moviesControler: MoviesController = MoviesController()
+    private var totalPages: Int = 0
+    private var loadedPages: Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +28,12 @@ class MoviesTableViewController: UITableViewController {
         
         self.title = "Movies"
         
-        self.moviesControler.getMoviesData { movies in
+        self.showWaitOverlay()
+        self.moviesControler.getMoviesData { (movies, totalPages) in
             self.moviesData = movies
+            self.totalPages = totalPages
             self.tableView.reloadData()
+            self.removeAllOverlays()
         }
         
     }
@@ -55,6 +61,19 @@ class MoviesTableViewController: UITableViewController {
         cell.moviePoster.kf.setImage(with: movie.poster)
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastElement = moviesData.count - 1
+        if indexPath.row == lastElement && self.loadedPages < self.totalPages{
+            self.showWaitOverlay()
+            self.loadedPages += 1
+            self.moviesControler.getMoviesData(page: self.loadedPages) { (movies, totalPerPage) in
+                self.moviesData.append(contentsOf: movies)
+                self.tableView.reloadData()
+                self.removeAllOverlays()
+            }
+        }
     }
 
 
