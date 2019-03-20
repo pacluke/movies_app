@@ -10,12 +10,27 @@ import UIKit
 import Kingfisher
 import SwiftOverlays
 
+extension MoviesTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+
 class MoviesTableViewController: UITableViewController {
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     private var moviesData: [Movie] = [Movie]()
     private let moviesControler: MoviesController = MoviesController()
+    private var filteredMovies:[Movie] = [Movie]()
+    
     private var totalPages: Int = 0
     private var loadedPages: Int = 1
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +43,13 @@ class MoviesTableViewController: UITableViewController {
         
         self.title = "Movies"
         
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search upcoming movies..."
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        searchController.searchBar.tintColor = UIColor.white
+        
         self.showWaitOverlay()
         self.moviesControler.getMoviesData { (movies, totalPages) in
             self.moviesData = movies
@@ -36,6 +58,25 @@ class MoviesTableViewController: UITableViewController {
             self.removeAllOverlays()
         }
         
+    }
+    
+    // MARK: - Search view
+    
+    private func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    private func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredMovies = moviesData.filter({( title : Movie) -> Bool in
+            return title.title.lowercased().contains(searchText.lowercased())
+        })
+        
+        tableView.reloadData()
+    }
+    
+    private func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
     }
 
     // MARK: - Table view data source
@@ -47,13 +88,22 @@ class MoviesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if isFiltering() {
+            return filteredMovies.count
+        }
         return moviesData.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "movie", for: indexPath) as! MovieTableViewCell
         
-        let movie = self.moviesData[indexPath.row]
+        var movie: Movie
+        
+        if isFiltering() {
+            movie = self.filteredMovies[indexPath.row]
+        } else {
+            movie = self.moviesData[indexPath.row]
+        }
 
         cell.movieTitle.text = movie.title
         cell.movieGenres.text = movie.genres
@@ -73,6 +123,23 @@ class MoviesTableViewController: UITableViewController {
                 self.tableView.reloadData()
                 self.removeAllOverlays()
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let selectedRow = self.tableView.indexPathForSelectedRow!.row
+        let movie: Movie
+        
+        if isFiltering() {
+            movie = self.filteredMovies[selectedRow]
+        } else {
+            movie = self.moviesData[selectedRow]
+        }
+        
+        if segue.identifier == "selectedMovie" {
+//            let movieView = segue.destination as! MovieViewController
+//            movieView.movie = movie
         }
     }
 
